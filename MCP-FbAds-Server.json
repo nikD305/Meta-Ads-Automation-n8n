@@ -1,0 +1,83 @@
+{
+  "name": "MCP-FbAds-Server gumroad",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "21b75a06-5ce0-495a-bc48-6cd6e42c0f18"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        -128
+      ],
+      "id": "cc0f4157-1ba3-4ca9-aa3b-efa682ebaf60",
+      "name": "MCP Server Trigger",
+      "webhookId": "21b75a06-5ce0-495a-bc48-6cd6e42c0f18"
+    },
+    {
+      "parameters": {
+        "url": "https://graph.facebook.com/v23.0/act_164638569605/insights?level=ad&time_range[since]=2025-01-01&time_range[until]=2025-01-31&limit=1000&fields=campaign_name,adset_name,ad_name,clicks,attribution_setting,buying_type,conversions,cost_per_conversion,cost_per_result,cost_per_unique_click,cost_per_unique_outbound_click,cpc,cpm,cpp,ctr,date_start,date_stop,impressions,outbound_clicks,optimization_goal,reach,results,spend,website_purchase_roas,result_rate,purchase_roas,outbound_clicks_ctr,objective_results&access_token=EAAUtgnb9bI0BPSa6hHSGVN2ctukyuyN9PZBb6au71nofnKC4uPVGz3obF9oHg1LsXEHJeXvOvP8Dp0Ss80vKogAsbIxIn2OxrJdeW0RO3pXQaxwgIn6KR7Jy1rrhR0w9nuZCE5d9Fwy4kaUWaavzW3iR6OoClhEtM4Y6rSn1BUw73tOyNfwhmZB2LzqcRPo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -112,
+        80
+      ],
+      "id": "92a02827-5c05-4d34-a0f4-45e9589cd401",
+      "name": "MetaAdsData"
+    },
+    {
+      "parameters": {
+        "url": "https://unified-deer-fancy.ngrok-free.app/webhook/4e78fe56-7a46-afd0-605c54021706",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -272,
+        80
+      ],
+      "id": "01643c78-b898-4b2d-9aa9-8ab45e2a1d33",
+      "name": "Fb-Ads-Posting"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "MetaAdsData": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fb-Ads-Posting": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a734e150-abc8-4c91-bf4c-71526a5a4c52",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c38845a9db3220fd5a29486debfa3c3aaae612606cb910c80133b877db7a0efd"
+  },
+  "id": "1NT6bR7GMQ8noZC0",
+  "tags": []
+}

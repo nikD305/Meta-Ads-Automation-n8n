@@ -1,0 +1,2017 @@
+{
+  "name": "FbAdsPosting-Automation gumroad",
+  "nodes": [
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://graph.facebook.com/v23.0/act_162286638569605/campaigns",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "objective",
+              "value": "OUTCOME_TRAFFIC"
+            },
+            {
+              "name": "status",
+              "value": "PAUSED"
+            },
+            {
+              "name": "buying_type",
+              "value": "AUCTION"
+            },
+            {
+              "name": "access_token",
+              "value": "EAAUtSa6hHSGVN2ctukyuyN9PZBb6au71nofnKC4uPVGz3obF9oHg1LsXEHJeXvOvP8Dp0Ss1pzzAdK1ej45iHkG80vKogAsbIxIn2OxrJdeW0RO3pXQaxwgIn6KR7Jy1rrhR0w9nuZCE5d9Fwy4kaUWaavzW3iR6OoClhEtM4Y6rSn1BUw73tOyNfwhmZB2LzqcRPo"
+            },
+            {
+              "name": "special_ad_categories",
+              "value": "[\"NONE\"]"
+            }
+          ]
+        }
+      },
+      "id": "459ade1b-a27e-48d3-a776-71577d6308a0",
+      "name": "Campaign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -368
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://graph.facebook.com/v23.0/act_162264638569605/adsets",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "campaign_id",
+              "value": "={{ $json.campaign_id }}"
+            },
+            {
+              "name": "daily_budget",
+              "value": "22200"
+            },
+            {
+              "name": "billing_event",
+              "value": "IMPRESSIONS"
+            },
+            {
+              "name": "access_token",
+              "value": "EAAUtgnb9bI0BPSa6VN2ctukyuyN9PZBb6au71nofnKC4uPVGz3obF9oHg1LsXEHJeXvOvP8Dp0Ss1pzzAdK1ej45iHkG80vKogAsbIxIn2OxrJdeW0RO3pXQaxwgIn6KR7Jy1rrhR0w9nuZCE5d9Fwy4kaUWaavzW3iR6OoClhEtM4Y6rSn1BUw73tOyNfwhmZB2LzqcRPo"
+            },
+            {
+              "name": "targeting",
+              "value": "{\n  \"age_max\": 65,\n  \"age_min\": 18,\n  \"geo_locations\": {\n    \"countries\": [\"IN\"],\n    \"location_types\": [\"home\", \"recent\"]\n  },\n  \"brand_safety_content_filter_levels\": [\"FACEBOOK_STANDARD\", \"AN_STANDARD\"],\n  \"targeting_automation\": {\n    \"advantage_audience\": 1\n  }\n}\n"
+            },
+            {
+              "name": "status",
+              "value": "PAUSED"
+            },
+            {
+              "name": "bid_strategy",
+              "value": "LOWEST_COST_WITHOUT_CAP"
+            }
+          ]
+        }
+      },
+      "id": "70330fa1-6d5c-4dca-ac2b-2c8a9bbd5c5a",
+      "name": "Adset",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -336
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Campaign",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        -368
+      ],
+      "id": "0a51b72a-339b-4855-9936-cfc56da04c3d",
+      "name": "Get Campaign Row",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1648,
+        -336
+      ],
+      "id": "1c7a3c3a-e494-46f1-9ed2-1eddff98f032",
+      "name": "Get Adset Rows",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2032,
+        -336
+      ],
+      "id": "c2c711fb-b8ac-4992-99d0-952a6adc2cec",
+      "name": "Get Adset Rows1",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.name }}",
+            "adsetID": "={{ $('Adset').all()[$itemIndex].json.id }}\n",
+            "campaign_id": "={{ $json.campaign_id }}"
+          },
+          "matchingColumns": [
+            "name"
+          ],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "adsetID",
+              "displayName": "adsetID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "daily_budget",
+              "displayName": "daily_budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "billing_event",
+              "displayName": "billing_event",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "age_max",
+              "displayName": "age_max",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "age_min",
+              "displayName": "age_min",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "bid_strategy",
+              "displayName": "bid_strategy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2240,
+        -336
+      ],
+      "id": "51170c98-b6d0-470e-a873-caee7bbacbad",
+      "name": "Update Adset Rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de32e806-0ba8-42db-a0dc-40935dea6cf0",
+              "name": "=test{{$itemIndex + 1}}",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        -496
+      ],
+      "id": "09268919-7b2f-466d-9367-5234805b8d69",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        320,
+        -320
+      ],
+      "id": "2e89baf6-ddb4-4676-a023-3b62ef431796",
+      "name": "Get Adset Rows2",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "CampID",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -496
+      ],
+      "id": "7346462e-9e97-4962-9c8a-4debf6990176",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "Data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -320
+      ],
+      "id": "261c3ad6-ca2a-4bc8-bcb1-2e266fe49893",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        736,
+        -336
+      ],
+      "id": "e4f7c9c4-7916-48bb-b14a-a233985f7038",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Collect all inputs\nconst allInputs = $input.all();\n\n// Extract CampID\nlet campID = [];\nfor (const item of allInputs) {\n  if (item.json.CampID) {\n    campID = item.json.CampID;\n    break;\n  }\n}\n\n// Extract Data\nlet data = [];\nfor (const item of allInputs) {\n  if (item.json.Data) {\n    data = item.json.Data;\n    break;\n  }\n}\n\n// Build lookup map (case-insensitive keys)\nconst campMap = {};\nfor (const c of campID) {\n  for (const [campName, id] of Object.entries(c)) {\n    campMap[campName.trim().toLowerCase()] = id;\n  }\n}\n\n// Fill Data\nconst filledData = data.map(row => {\n  const newRow = { ...row };\n  const campNameKey = (newRow.CampName || \"\").trim().toLowerCase();\n  if (!newRow.campaign_id || newRow.campaign_id.trim() === \"\") {\n    newRow.campaign_id = campMap[campNameKey] || \"\";\n  }\n  return newRow;\n});\n\n// Return only one item\nreturn [\n  {\n    json: {\n      Data: filledData\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        -336
+      ],
+      "id": "4b9dab22-6ab2-408a-9c8b-97c8837febbf",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "Data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        -336
+      ],
+      "id": "afc36092-a488-4311-82d5-ca5368806dfc",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://graph.facebook.com/v23.0/act_16228638569605/adcreatives",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "access_token",
+              "value": "EAAUtgnb9bI0B6hHSGVN2ctukyuyN9PZBb6au71nofnKC4uPVGz3obF9oHg1LsXEHJeXvOvP8Dp0Ss1pzzAdK1ej45iHkG80vKogAsbIxIn2OxrJdeW0RO3pXQaxwgIn6KR7Jy1rrhR0w9nuZCE5d9Fwy4kaUWaavzW3iR6OoClhEtM4Y6rSn1BUw73tOyNfwhmZB2LzqcRPo"
+            },
+            {
+              "name": "=name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "object_story_spec",
+              "value": "={\n  \"page_id\": \"35243222185234\",\n  \"link_data\": {\n    \"message\": \"Time is money—don’t waste it!\",\n    \"link\": \"http://dbossworld.com/\",\n    \"name\": \"Get the offer\",\n    \"call_to_action\": {\n      \"type\": \"LEARN_MORE\",\n      \"value\": {\n        \"link\": \"http://dbossworld.com/\"\n      }\n    },\n    \"picture\": \"{{ $json.ImageURL }}\"\n  }\n}"
+            }
+          ]
+        }
+      },
+      "id": "8f3aacd4-9f75-488b-8aa9-6ed5df443b03",
+      "name": "AdCreative",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://graph.facebook.com/v23.0/act_1624638569605/ads",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "access_token",
+              "value": "EAAUtgnb9bI0SGVN2ctukyuyN9PZBb6au71nofnKC4uPVGz3obF9oHg1LsXEHJeXvOvP8Dp0Ss1pzzAdK1ej45iHkG80vKogAsbIxIn2OxrJdeW0RO3pXQaxwgIn6KR7Jy1rrhR0w9nuZCE5d9Fwy4kaUWaavzW3iR6OoClhEtM4Y6rSn1BUw73tOyNfwhmZB2LzqcRPo"
+            },
+            {
+              "name": "name",
+              "value": "={{ $json.creativeName }}"
+            },
+            {
+              "name": "adset_id",
+              "value": "={{ $json.adsetID }}"
+            },
+            {
+              "name": "creative",
+              "value": "={\n    \"creative_id\":{{ $json.creative_id }}\n  }"
+            },
+            {
+              "name": "status",
+              "value": "PAUSED"
+            }
+          ]
+        }
+      },
+      "id": "a24139cc-14b3-4005-ab36-ac7e8cdbd9fc",
+      "name": "AdPost",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ✅ Only run once (ignore duplicate executions in n8n)\nif ($itemIndex > 0) {\n  return [];\n}\n\n// Step 1: Extract merged data\nconst mergedData = $input.all().map(i => i.json.data).flat().filter(Boolean);\n\n// Step 2: Collect Fb-Adset and Fb-Ad arrays\nlet fbAdset = [];\nlet fbAd = [];\n\nmergedData.forEach(item => {\n  if (Array.isArray(item['Fb-Adset'])) {\n    fbAdset.push(...item['Fb-Adset']);\n  }\n  if (Array.isArray(item['Fb-Ad'])) {\n    fbAd.push(...item['Fb-Ad']);\n  }\n});\n\n// Step 3: Build mapping (AdsetName -> adsetID)\nconst adsetMapping = {};\nfbAdset.forEach(adset => {\n  if (adset.name && adset.adsetID) {\n    adsetMapping[adset.name.trim()] = adset.adsetID.trim();\n  }\n});\n\n// Step 4: Fill adsetID in Fb-Ad\nfbAd.forEach(ad => {\n  const key = ad.AdsetName ? ad.AdsetName.trim() : \"\";\n  ad.adsetID = adsetMapping[key] || \"\";\n});\n\n// Step 5: Remove duplicates based on creativeName\nconst seen = new Set();\nconst uniqueAds = fbAd.filter(ad => {\n  if (seen.has(ad.creativeName)) return false;\n  seen.add(ad.creativeName);\n  return true;\n});\n\n// ✅ Step 6: Return only unique creatives\nreturn [\n  {\n    json: {\n      \"Fb-Ad\": uniqueAds\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1536,
+        400
+      ],
+      "id": "ac9f9d93-6627-49bb-94d0-08cc3f8b1a82",
+      "name": "Code",
+      "alwaysOutputData": false,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        400
+      ],
+      "id": "ad6d1cab-9170-461f-9a81-d98f9b5f5719",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -32,
+        -16
+      ],
+      "id": "9a527d9e-441c-4a84-8834-869ea0517c37",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "H4g4nDJchmMCQNyd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v23.0/act_162286438569605/adimages?access_token=EAAUtgnb9bI0BPSa6hHSGVN2ctukyuyN9PZBb6au71nofnKC4uPVGz3obF9oHg1LsXEHJeXvOvP8Dp0Ss1pzzAdK1ej45iHkG80vKogAsbIxIn2OxrJdeW0RO3pXQaxwgIn6KR7Jy1rrhR0w9nuZCE5d9Fwy4kaUWaavzW3iR6OoClhEtM4Y6rSn1BUw73tOyNfqcRPo",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "filename",
+              "inputDataFieldName": "=data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        80
+      ],
+      "id": "dfe15ce4-2347-4920-a6f1-d7fa4b22b741",
+      "name": "AdImagesUpload"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1WDmbUUKG_2DK4a7GxmGqsZQjgzbY2z2E",
+            "mode": "list",
+            "cachedResultName": "FbAds-Images",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1WDmbUUKG_2DK4a7GxmGqsZQjgzbY2z2E"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -256,
+        -16
+      ],
+      "id": "3dd41520-bd6d-41d3-a1ba-b4b1604dbdfe",
+      "name": "GetAdsfromGdrive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "H4g4nDJchmMCQNyd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "CreativeSheet",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        -80
+      ],
+      "id": "8959fddc-3e50-492f-b6c6-c92f139d11dc",
+      "name": "Aggregate3"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "ImageUpload",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        80
+      ],
+      "id": "78347070-91bc-40a7-967e-6ca1b43c585e",
+      "name": "Aggregate4"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        592,
+        -64
+      ],
+      "id": "2ce2f7e0-e8b9-432c-b85b-8b8c3871c3c9",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "CreativeSheet",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        960,
+        -64
+      ],
+      "id": "951b896c-8493-4c99-81e3-b01b9922dde0",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        400
+      ],
+      "id": "8a18df66-c1c2-441e-8912-5606a9c7d27f",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "Fb-Adset",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        864,
+        288
+      ],
+      "id": "dc518caf-71bf-4983-b27c-83479ccbaab0",
+      "name": "Aggregate5"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "Fb-Ad",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        880,
+        496
+      ],
+      "id": "167dec88-dddd-4f17-948f-5e4dedc59927",
+      "name": "Aggregate6"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "['Fb-Ad']",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1744,
+        400
+      ],
+      "id": "e7684a7f-271b-4282-ab63-0a309da09b1c",
+      "name": "Split Out2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Take all input data at once\nconst allInputs = $input.all();\n\n// Get CreativeSheet from the first input that has it\nlet creativeSheet = [];\nfor (const input of allInputs) {\n  if (input.json.CreativeSheet) {\n    creativeSheet = input.json.CreativeSheet;\n    break; // stop after first one\n  }\n}\n\n// Merge all ImageUpload arrays into one\nconst imageUpload = allInputs\n  .filter(i => i.json.ImageUpload)\n  .flatMap(i => i.json.ImageUpload);\n\n// Helper function: find URL for a given Ad\nfunction findUrlForAd(adName) {\n  for (const entry of imageUpload) {\n    if (entry.images) {\n      for (const [fileName, fileData] of Object.entries(entry.images)) {\n        if (fileName.replace(\".jpg\", \"\") === adName) {\n          return fileData.url || \"\";\n        }\n      }\n    }\n  }\n  return \"\";\n}\n\n// Build result strictly by number of rows in CreativeSheet\nconst filledCreativeSheet = [];\nfor (let i = 0; i < creativeSheet.length; i++) {\n  const row = creativeSheet[i];\n  filledCreativeSheet.push({\n    name: row.name,\n    Ads: row.Ads,\n    ImageURL: findUrlForAd(row.Ads)\n  });\n}\n\n// ✅ Return only ONE item with full CreativeSheet array\nreturn [\n  {\n    json: {\n      CreativeSheet: filledCreativeSheet\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        -64
+      ],
+      "id": "ef5de655-c921-43d2-915b-707c494b32d6",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e70b15e9-6cf8-47d7-95d7-1bf9e647fe8d",
+              "name": "=AdsetName",
+              "value": "={{ $('Split Out2').item.json.AdsetName }}",
+              "type": "string"
+            },
+            {
+              "id": "ef5061a7-3fdb-46db-80de-2f881d0a9afa",
+              "name": "=adsetID",
+              "value": "={{ $('Split Out2').item.json.adsetID }}",
+              "type": "string"
+            },
+            {
+              "id": "ab690675-d3fc-4156-84b4-964c8cea31bc",
+              "name": "=AdName",
+              "value": "={{ $('Split Out2').item.json.Adname }}",
+              "type": "string"
+            },
+            {
+              "id": "ec981a3c-90e3-4d29-a576-6df3708124f6",
+              "name": "=AdID",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1ddc92a3-32bb-42ed-ae5d-e467ae8d2d84",
+              "name": "status",
+              "value": "={{ $('Split Out2').item.json.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1344,
+        848
+      ],
+      "id": "74a72ec0-84ed-40ce-b178-2a94ca90f706",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const campArray = items[0].json.CampName;\nconst adsetArray = items[1].json.AdsetName;\n\nconst output = adsetArray.map(adset => {\n  const campMatch = campArray.find(camp => camp.name === adset.AdsetName);\n\n  return {\n    Campaign: campMatch ? campMatch.CampName : null,\n    CampaignID: campMatch ? campMatch.campaign_id : null,\n    Adset: adset.AdsetName,\n    AdsetID: adset.adsetID,\n    Ads: adset.AdName,\n    AdsID: adset.AdID,\n    status: adset.status\n  };\n});\n\nreturn output.map(row => ({ json: row }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1888,
+        768
+      ],
+      "id": "89c2eb1a-b85d-4de3-8c47-2cf6caa2263a",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "CampName",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        704
+      ],
+      "id": "e3ff6ff5-44d1-4383-9e2e-1ded708ebfb6",
+      "name": "Aggregate7"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "AdsetName",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        848
+      ],
+      "id": "ef09ebe2-4af8-4b6e-918d-9d91c5181c76",
+      "name": "Aggregate8"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1696,
+        768
+      ],
+      "id": "4981469e-6568-4dd1-a864-acb1fcf3997f",
+      "name": "Merge3"
+    },
+    {
+      "parameters": {
+        "path": "c9b20dff-fafb-451f-8336-ed18bbb9912f",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        -368
+      ],
+      "id": "2d53aea4-180b-47c0-947a-134153ff92bb",
+      "name": "Webhook",
+      "webhookId": "c9b20dff-fafb-451f-8336-ed18bbb9912f"
+    },
+    {
+      "parameters": {
+        "chatId": "71093214",
+        "text": "={{ JSON.stringify($json.data, null, 2) }}\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2528,
+        768
+      ],
+      "id": "ce23e96a-b0ea-4e2e-a618-eee2a6e0ba69",
+      "name": "Send a text message",
+      "webhookId": "89e26a02-8b40-4010-ac88-b8f41d8290da",
+      "credentials": {
+        "telegramApi": {
+          "id": "7ihiAoWj695KldTd",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        768
+      ],
+      "id": "40d6e8b0-271d-462c-9c99-c41deb2efa22",
+      "name": "Aggregate9"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?gid=804087827#gid=804087827",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.name }}",
+            "CampName": "={{ $json.CampName }}",
+            "adsetID": "={{ $json.adsetID }}",
+            "campaign_id": "={{ $json.campaign_id }}",
+            "daily_budget": "={{ $json.daily_budget }}",
+            "billing_event": "={{ $json.billing_event }}",
+            "age_max": "={{ $json.age_max }}",
+            "age_min": "={{ $json.age_min }}",
+            "status": "={{ $json.status }}",
+            "bid_strategy": "={{ $json.bid_strategy }}"
+          },
+          "matchingColumns": [
+            "name"
+          ],
+          "schema": [
+            {
+              "id": "CampName",
+              "displayName": "CampName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "adsetID",
+              "displayName": "adsetID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "daily_budget",
+              "displayName": "daily_budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "billing_event",
+              "displayName": "billing_event",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "age_max",
+              "displayName": "age_max",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "age_min",
+              "displayName": "age_min",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "bid_strategy",
+              "displayName": "bid_strategy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1376,
+        -336
+      ],
+      "id": "f5e0f427-b119-4185-95d2-16581dd9b3a8",
+      "name": "Update row in sheet(Adset)",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2056767592,
+          "mode": "list",
+          "cachedResultName": "Creative",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=2056767592"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        -80
+      ],
+      "id": "fbdea176-3905-449e-b167-9b5e9b003b7c",
+      "name": "Get (Creative) Rows1",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1866666170,
+          "mode": "list",
+          "cachedResultName": "Ad",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=1866666170"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1472,
+        -48
+      ],
+      "id": "caba9bf4-b4bc-404f-884c-d99248e6dd89",
+      "name": "Get (Ad) Rows",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1866666170,
+          "mode": "list",
+          "cachedResultName": "Ad",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=1866666170"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "creativeName": "={{ $json.creativeName }}",
+            "creative_id": "={{ $('AdCreative').all()[ $itemIndex ].json.id }}\n"
+          },
+          "matchingColumns": [
+            "creativeName"
+          ],
+          "schema": [
+            {
+              "id": "Adname",
+              "displayName": "Adname",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "AdsetName",
+              "displayName": "AdsetName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "adsetID",
+              "displayName": "adsetID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "creativeName",
+              "displayName": "creativeName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "creative_id",
+              "displayName": "creative_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1680,
+        -48
+      ],
+      "id": "bcd17c37-f249-4a01-b13e-376e5eafa030",
+      "name": "Update (Ad) Rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        288
+      ],
+      "id": "0ddc94a5-d257-47b4-8da0-07a82edb69c6",
+      "name": "Get (Adset) Rows3",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1866666170,
+          "mode": "list",
+          "cachedResultName": "Ad",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=1866666170"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        688,
+        496
+      ],
+      "id": "7cde39ee-8388-46f1-9296-17cc57330362",
+      "name": "Get (Ad) Rows1",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 804087827,
+          "mode": "list",
+          "cachedResultName": "Adset",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=804087827"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        704
+      ],
+      "id": "381f3a34-d6b5-4d8d-bef1-148e9cf39f5c",
+      "name": "Get rows in sheet (Adset)",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU",
+          "mode": "list",
+          "cachedResultName": "FbAds-Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1592255883,
+          "mode": "list",
+          "cachedResultName": "Active-Ads-Status",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_zCpxwJ41xDABykEqKPTp2z8Pq3KQA1sNfDoj79xwEU/edit#gid=1592255883"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Campaign": "={{ $json.Campaign }}",
+            "CampaignID": "={{ $json.CampaignID }}",
+            "Adset": "={{ $json.Adset }}",
+            "AdsetID": "={{ $json.AdsetID }}",
+            "Ads": "={{ $json.Ads }}",
+            "AdsID": "={{ $json.AdsID }}",
+            "status": "={{ $json.status }}"
+          },
+          "matchingColumns": [
+            "Campaign"
+          ],
+          "schema": [
+            {
+              "id": "Campaign",
+              "displayName": "Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CampaignID",
+              "displayName": "CampaignID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Adset",
+              "displayName": "Adset",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "AdsetID",
+              "displayName": "AdsetID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Ads",
+              "displayName": "Ads",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "AdsID",
+              "displayName": "AdsID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2096,
+        768
+      ],
+      "id": "21a17504-0e6f-47d9-85bc-28c3e4cbf088",
+      "name": "Append or update row in sheet(Active-Ads-Status)",
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zOVCYXkElf6Pdgpk",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Campaign": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Adset Rows2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Adset": {
+      "main": [
+        [
+          {
+            "node": "Get Adset Rows1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Campaign Row": {
+      "main": [
+        [
+          {
+            "node": "Campaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Adset Rows": {
+      "main": [
+        [
+          {
+            "node": "Adset",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Adset Rows1": {
+      "main": [
+        [
+          {
+            "node": "Update Adset Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Adset Rows2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet(Adset)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AdCreative": {
+      "main": [
+        [
+          {
+            "node": "Get (Ad) Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "AdImagesUpload",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get (Creative) Rows1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AdImagesUpload": {
+      "main": [
+        [
+          {
+            "node": "Aggregate4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetAdsfromGdrive": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate3": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate4": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "AdCreative",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate5": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate6": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "AdPost",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Adset Rows": {
+      "main": [
+        [
+          {
+            "node": "GetAdsfromGdrive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AdPost": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get rows in sheet (Adset)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate7": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate8": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet(Active-Ads-Status)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Campaign Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate9": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet(Adset)": {
+      "main": [
+        [
+          {
+            "node": "Get Adset Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get (Creative) Rows1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get (Ad) Rows": {
+      "main": [
+        [
+          {
+            "node": "Update (Ad) Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update (Ad) Rows": {
+      "main": [
+        [
+          {
+            "node": "Get (Ad) Rows1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get (Adset) Rows3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get (Adset) Rows3": {
+      "main": [
+        [
+          {
+            "node": "Aggregate5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get (Ad) Rows1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get rows in sheet (Adset)": {
+      "main": [
+        [
+          {
+            "node": "Aggregate7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet(Active-Ads-Status)": {
+      "main": [
+        [
+          {
+            "node": "Aggregate9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "eaedd114-65cf-417b-bd19-9fecfb877c82",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c38845a9db3220fd5a29486debfa3c3aaae612606cb910c80133b877db7a0efd"
+  },
+  "id": "GHx7T3ZS4ffnZZ5h",
+  "tags": []
+}

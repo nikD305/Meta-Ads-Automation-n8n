@@ -1,0 +1,214 @@
+{
+  "name": "MetaAds-MainAISystem",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=  \nYou are a world-class media buying professional and MCP orchestrator.\nYou must follow these rules when handling user requests:\n\nWhen the user requests \"post the ads\" or something similar →\n\nCall the MCP client FbAds and run the MCP action Fb-Ads-Posting to trigger the posting workflow.\n\nWhen the user requests \"get ads report\" or something similar →\n\nCall the MCP client FbAds and run the MCP action MetaAdsData to fetch the full ads report.\n\nReturn the report in a clear, well-structured professional format, without raw JSON clutter.\n\nWhen the user requests \"get top X best performing ads\" or something similar →\n\nCall the MCP client FbAds and run the MCP action MetaAdsData to fetch the ads performance data (fields: campaign_name, adset_name, ad_name, impressions, clicks, spend, cpc, cpm, cpp, ctr, results, website_purchase_roas, purchase_roas).\n\nApply this Performance Scoring Logic to rank ads:\n\nPerformance Score =  \n(0.40 × Normalized_ROAS) +  \n(0.20 × Normalized_CTR) +  \n(0.15 × (1 - Normalized_CPC)) +  \n(0.15 × Normalized_Conversions) +  \n(0.10 × Normalized_Spend_Adjusted)\n\n\nNormalize all metrics (0–1) using min-max scaling.\n\nInvert CPC/CPM (lower = better).\n\nGive slight positive bias to ads with higher spend but consistent results.\n\nIdentify the top [X] best performing ads (default = 5 if X not specified).\n\nReturn only a clean, minimal ranked list in this format:\n\nRank. Campaign Name | Adset Name | Ad Name  \nReason: 1–2 sentences (why it’s a top performer — ROAS, CTR, CPC, CPM, or results).  \n\nDo not include raw metrics, tables, or extra data.\n\nAlways respond in a professional, concise media buying analyst style.\n---  \n\nUser input: {{ $json.input }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        96,
+        -80
+      ],
+      "id": "5ec12d63-75b7-4f3f-bfc1-ef1b5474486a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        64,
+        128
+      ],
+      "id": "f3eca342-966f-4993-8966-120fcab33f5a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JKKt0ocFaR2yuZik",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const aiOutput = $input.first().json.output;\n\n// Parse the text to extract ad performance data\nconst adEntries = [];\nconst lines = aiOutput.split('\\n');\n\nlet currentAd = {};\n\nfor (let i = 0; i < lines.length; i++) {\n  const line = lines[i].trim();\n  \n  // Detect new ad entry (numbered list)\n  const adMatch = line.match(/^(\\d+)\\.\\s+\\*\\*Campaign:\\s*(.+?),\\s*Ad Set:\\s*(.+?),\\s*Ad:\\s*(.+?)\\*\\*/);\n  if (adMatch) {\n    if (Object.keys(currentAd).length > 0) {\n      adEntries.push(currentAd);\n    }\n    currentAd = {\n      rank: parseInt(adMatch[1]),\n      campaign_name: adMatch[2].trim(),\n      adset_name: adMatch[3].trim(),\n      ad_name: adMatch[4].trim(),\n      metrics: {}\n    };\n    continue;\n  }\n  \n  // Extract metrics\n  const ctrMatch = line.match(/CTR:\\s*([\\d.]+)%/);\n  const cpcMatch = line.match(/CPC:\\s*\\$\\s*([\\d.]+)/);\n  const cpmMatch = line.match(/CPM:\\s*\\$\\s*([\\d.]+)/);\n  \n  if (ctrMatch) currentAd.metrics.ctr = parseFloat(ctrMatch[1]);\n  if (cpcMatch) currentAd.metrics.cpc = parseFloat(cpcMatch[1]);\n  if (cpmMatch) currentAd.metrics.cpm = parseFloat(cpmMatch[1]);\n  \n  // Extract reason\n  if (line.startsWith('- Reason:')) {\n    currentAd.reason = line.replace('- Reason:', '').trim();\n  }\n}\n\n// Add the last ad entry\nif (Object.keys(currentAd).length > 0) {\n  adEntries.push(currentAd);\n}\n\nreturn [{\n  json: {\n    topPerformingAds: adEntries,\n    summary: \"Top 5 best performing ads based on CTR, CPC, and CPM\",\n    originalText: aiOutput\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        -80
+      ],
+      "id": "e4ea080e-5836-4524-80ba-299c0a916fd9",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://unified-deer-fancy.ngrok-free.app/mcp/864692d5-75dc-4c44-9085-8433e55a1f0f",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        128
+      ],
+      "id": "1be525bc-dd7d-4862-96d4-28b9fe2784c5",
+      "name": "FbAds"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -336,
+        -80
+      ],
+      "id": "1a7191ed-5a2a-4839-98b5-7467e625157c",
+      "name": "Telegram Trigger",
+      "webhookId": "28345db7-aa45-4098-a28d-739bd99686a8",
+      "credentials": {
+        "telegramApi": {
+          "id": "7ihiAoWj695KldTd",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dca16d38-6ffe-4e0a-bb40-4a7d3eb4e9b9",
+              "name": "input",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -128,
+        -80
+      ],
+      "id": "7b84d70c-6ceb-4cda-8f32-55d082f0e91a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "chatId": "710493214",
+        "text": "={{ $json.originalText }}\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        -80
+      ],
+      "id": "baae7d7f-fe3e-4b9d-8554-8da370f1a8e4",
+      "name": "Send a text message",
+      "webhookId": "dc77cac8-0ae9-40b9-a360-cc5a144f2762",
+      "credentials": {
+        "telegramApi": {
+          "id": "7ihiAoWj695KldTd",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FbAds": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "47099060-0585-42ae-a8d9-deea554346ec",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c38845a9db3220fd5a29486debfa3c3aaae612606cb910c80133b877db7a0efd"
+  },
+  "id": "Q50ijHrhOIM8WV7s",
+  "tags": []
+}
